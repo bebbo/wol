@@ -7,8 +7,7 @@
 #include <ws2tcpip.h>
 
 #ifdef _MSC_VER
-#undef lstrlen
-static int lstrlen(char const * p) {
+static size_t strlen(char const * p) {
 	int n = 0;
 	while (*p++) {
 		++n;
@@ -30,12 +29,12 @@ static void init() {
 static unsigned long out;
 static void cputs(char const * s)
 {
-	WriteFile(mstdout, s, lstrlen(s), &out, 0);
+	WriteFile(mstdout, s, strlen(s), &out, 0);
 	WriteFile(mstdout, "\r\n", 2, &out, 0);
 }
 static void printf1(char const * s)
 {
-	WriteFile(mstdout, s, lstrlen(s), &out, 0);
+	WriteFile(mstdout, s, strlen(s), &out, 0);
 }
 #define puts cputs
 
